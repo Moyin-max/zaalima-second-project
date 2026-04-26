@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container": "#201f22",
+                    "on-surface": "#e5e1e4",
+                    "on-secondary-container": "#d6a9ff",
+                    "error": "#ffb4ab",
+                    "tertiary-container": "#00a572",
+                    "surface-dim": "#131315",
+                    "secondary-fixed-dim": "#ddb7ff",
+                    "outline": "#8c909f",
+                    "on-surface-variant": "#c2c6d6",
+                    "surface-tint": "#adc6ff",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#6900b3",
+                    "on-background": "#e5e1e4",
+                    "inverse-primary": "#005ac2",
+                    "on-tertiary": "#003824",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "primary-fixed": "#d8e2ff",
+                    "on-primary-fixed-variant": "#004395",
+                    "surface-container-high": "#2a2a2c",
+                    "background": "#131315",
+                    "on-primary-fixed": "#001a42",
+                    "on-error": "#690005",
+                    "primary-container": "#4d8eff",
+                    "secondary-fixed": "#f0dbff",
+                    "inverse-on-surface": "#313032",
+                    "inverse-surface": "#e5e1e4",
+                    "on-secondary-fixed": "#2c0051",
+                    "surface-container-highest": "#353437",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "surface-container-lowest": "#0e0e10",
+                    "secondary-container": "#6f00be",
+                    "surface-bright": "#39393b",
+                    "on-tertiary-container": "#00311f",
+                    "surface": "#131315",
+                    "tertiary": "#4edea3",
+                    "on-primary-container": "#00285d",
+                    "on-tertiary-fixed": "#002113",
+                    "primary-fixed-dim": "#adc6ff",
+                    "tertiary-fixed": "#6ffbbe",
+                    "surface-variant": "#353437",
+                    "secondary": "#ddb7ff",
+                    "on-primary": "#002e6a",
+                    "on-secondary": "#490080",
+                    "outline-variant": "#424754",
+                    "primary": "#adc6ff",
+                    "error-container": "#93000a",
+                    "surface-container-low": "#1c1b1d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "base-unit": "4px",
+                    "stack-md": "16px",
+                    "container-max": "1440px",
+                    "margin-page": "40px",
+                    "stack-lg": "32px",
+                    "stack-sm": "8px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "headline-xl": ["Space Grotesk"],
+                    "body-base": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "code-snippet": ["monospace"],
+                    "headline-md": ["Space Grotesk"]
+            },
+            "fontSize": {
+                    "body-sm": ["13px", {"lineHeight": "1.4", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                    "body-base": ["14px", {"lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "label-caps": ["11px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "code-snippet": ["13px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #09090B;
+        }
+    </style>
+</head>
+<body class="font-body-base text-on-surface selection:bg-primary/30 min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-[#09090B] dark:bg-[#09090B] border-b border-[#27272A] dark:border-[#27272A] docked full-width top-0 z-50 flat no shadows">
+<nav class="flex justify-between items-center h-14 px-6 w-full max-w-full mx-auto font-['Space_Grotesk'] text-sm tracking-tight">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-white dark:text-white">Extensio.ai</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-[#A1A1AA] dark:text-[#A1A1AA] hover:text-white transition-colors" href="#">Dashboard</a>
+<a class="text-[#A1A1AA] dark:text-[#A1A1AA] hover:text-white transition-colors" href="#">Pricing</a>
+<a class="text-[#A1A1AA] dark:text-[#A1A1AA] hover:text-white transition-colors" href="#">Docs</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<a class="text-white dark:text-white border-b-2 border-blue-500 pb-1 active:scale-95 duration-100" href="#">Login</a>
+<a class="bg-primary text-on-primary px-3 py-1.5 rounded-lg font-medium hover:bg-[#18181B] dark:hover:bg-[#18181B] transition-all active:scale-95 duration-100" href="#">Sign up</a>
+</div>
+</nav>
+</header>
+<!-- Main Content: Login Canvas -->
+<main class="flex-grow flex items-center justify-center p-gutter">
+<div class="w-full max-w-[400px]">
+<!-- Login Card -->
+<div class="bg-[#18181B] border border-[#27272A] rounded-xl overflow-hidden">
+<!-- Card Header -->
+<div class="px-8 pt-8 pb-4">
+<h1 class="font-headline-md text-headline-md text-white mb-2">Welcome back</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Enter your credentials to access your account</p>
+</div>
+<!-- Form -->
+<form class="p-8 space-y-6">
+<div class="space-y-4">
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider" for="email">Email</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">mail</span>
+<input class="w-full bg-[#09090B] border border-[#27272A] rounded-lg py-2.5 pl-10 pr-4 text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-body-base text-body-base" id="email" name="email" placeholder="name@company.com" type="email"/>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider" for="password">Password</label>
+<a class="font-body-sm text-[11px] text-primary hover:underline" href="#">Forgot password?</a>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">lock</span>
+<input class="w-full bg-[#09090B] border border-[#27272A] rounded-lg py-2.5 pl-10 pr-4 text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-body-base text-body-base" id="password" name="password" placeholder="••••••••" type="password"/>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-medium py-2.5 rounded-lg active:scale-[0.98] transition-all hover:brightness-110 flex items-center justify-center gap-2" type="submit">
+<span>Login</span>
+<span class="material-symbols-outlined text-base">login</span>
+</button>
+<!-- Divider -->
+<div class="relative flex items-center py-2">
+<div class="flex-grow border-t border-[#27272A]"></div>
+<span class="flex-shrink mx-4 font-label-caps text-label-caps text-outline">OR CONTINUE WITH</span>
+<div class="flex-grow border-t border-[#27272A]"></div>
+</div>
+<!-- Social Login -->
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-2 border border-[#27272A] rounded-lg py-2 hover:bg-[#27272A] transition-colors active:scale-95" type="button">
+<span class="material-symbols-outlined text-sm">terminal</span>
+<span class="font-body-sm text-body-sm text-white">GitHub</span>
+</button>
+<button class="flex items-center justify-center gap-2 border border-[#27272A] rounded-lg py-2 hover:bg-[#27272A] transition-colors active:scale-95" type="button">
+<span class="material-symbols-outlined text-sm">cloud</span>
+<span class="font-body-sm text-body-sm text-white">Google</span>
+</button>
+</div>
+</form>
+<!-- Footer Link -->
+<div class="px-8 pb-8 text-center">
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                        Don't have an account? 
+                        <a class="text-primary font-medium hover:underline ml-1" href="#">Sign up</a>
+</p>
+</div>
+</div>
+<!-- Background Decoration (Brutalist style) -->
+<div class="mt-8 text-center">
+<p class="font-code-snippet text-code-snippet text-outline-variant opacity-50">
+                    AUTH_SERVICE_STABLE_v2.0.4
+                </p>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#09090B] dark:bg-[#09090B] border-t border-[#27272A] dark:border-[#27272A] w-full py-8">
+<div class="flex flex-col md:flex-row justify-between items-center px-6 max-w-7xl mx-auto gap-4 font-['Space_Grotesk'] text-xs text-[#71717A]">
+<div class="flex items-center gap-4">
+<span class="text-sm font-semibold text-white">Extensio.ai</span>
+<span class="cursor-default">© 2024 Extensio.ai</span>
+</div>
+<div class="flex items-center gap-6">
+<a class="text-[#71717A] hover:text-white transition-colors cursor-pointer hover:underline" href="#">Terms</a>
+<a class="text-[#71717A] hover:text-white transition-colors cursor-pointer hover:underline" href="#">Privacy</a>
+<a class="text-[#71717A] hover:text-white transition-colors cursor-pointer hover:underline" href="#">Support</a>
+<a class="text-[#71717A] hover:text-white transition-colors cursor-pointer hover:underline" href="#">GitHub</a>
+</div>
+</div>
+</footer>
+<!-- Background texture simulation using CSS gradient -->
+<div class="fixed inset-0 pointer-events-none z-[-1] opacity-20" data-alt="subtle dark grid pattern on a black background mimicking a technical blueprint or code editor surface" style="background-image: radial-gradient(#27272A 0.5px, transparent 0.5px); background-size: 24px 24px;"></div>
+</body></html>

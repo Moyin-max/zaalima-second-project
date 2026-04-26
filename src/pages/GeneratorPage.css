@@ -1,0 +1,245 @@
+.generator {
+  display: flex;
+  min-height: calc(100vh - 56px - 80px);
+  overflow: hidden;
+  background-color: var(--bg-inset);
+}
+
+/* Left Sidebar */
+.gen-sidebar {
+  width: 380px;
+  min-width: 380px;
+  border-right: 1px solid var(--border-base);
+  background: var(--bg-canvas);
+  padding: var(--sp-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+  overflow-y: auto;
+}
+
+.gen-sidebar-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.gen-status {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  color: var(--success);
+  margin-bottom: var(--sp-2);
+}
+
+.gen-status-icon {
+  font-size: 20px;
+}
+
+.gen-status-text {
+  font-size: 11px;
+}
+
+.gen-title {
+  color: var(--text-primary);
+}
+
+.gen-desc {
+  color: var(--text-secondary);
+}
+
+/* Prompt Card */
+.gen-prompt-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-base);
+  padding: var(--sp-4);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  box-shadow: var(--shadow-xs);
+}
+
+.gen-prompt-label {
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+.gen-prompt-text {
+  color: var(--text-primary);
+  background: var(--bg-inset);
+  padding: var(--sp-3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-base);
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Actions */
+.gen-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+/* Extension Info */
+.gen-extension-info {
+  margin-top: auto;
+  padding-top: var(--sp-6);
+  border-top: 1px solid var(--border-base);
+}
+
+.gen-ext-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3);
+  background: var(--bg-inset);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-base);
+}
+
+.gen-ext-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--secondary-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gen-ext-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.gen-ext-updated {
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Right Panel — Code Viewer */
+.gen-code-panel {
+  flex: 1;
+  background: var(--bg-elevated);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Tabs */
+.gen-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-base);
+  background: var(--bg-inset);
+}
+
+.gen-tab {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 12px 24px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  border-right: 1px solid var(--border-base);
+  border-bottom: 2px solid transparent;
+  transition: all var(--transition-base);
+}
+
+.gen-tab:hover {
+  color: var(--text-primary);
+  background: rgba(0,0,0,0.02);
+}
+
+.gen-tab.active {
+  color: var(--primary-text);
+  background: var(--bg-elevated);
+  border-bottom: 2px solid var(--primary);
+}
+
+.gen-tab-icon {
+  font-size: 16px;
+}
+
+.gen-tab.active .gen-tab-icon {
+  color: var(--primary);
+}
+
+/* Code Body */
+.gen-code-body {
+  flex: 1;
+  padding: var(--sp-6);
+  overflow: auto;
+  background: #F8FAFC; /* slightly different light bg for code */
+}
+
+.gen-code-content {
+  color: #1E293B;
+  font-size: 13px;
+  line-height: 1.7;
+  white-space: pre;
+  tab-size: 2;
+}
+
+/* Status Bar */
+.gen-statusbar {
+  height: 40px;
+  background: var(--bg-inset);
+  border-top: 1px solid var(--border-base);
+  padding: 0 var(--sp-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.gen-statusbar-left,
+.gen-statusbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  color: var(--text-muted);
+}
+
+.gen-sync {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.gen-sync-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+  animation: pulse 2s infinite;
+}
+
+.gen-copy-btn {
+  color: var(--text-muted);
+  transition: color var(--transition-base);
+  display: flex;
+  align-items: center;
+}
+
+.gen-copy-btn:hover {
+  color: var(--text-primary);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .generator {
+    flex-direction: column;
+  }
+
+  .gen-sidebar {
+    width: 100%;
+    min-width: unset;
+    border-right: none;
+    border-bottom: 1px solid var(--border-base);
+    padding: var(--sp-6);
+  }
+}

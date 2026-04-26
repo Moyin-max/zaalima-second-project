@@ -1,0 +1,153 @@
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-6);
+  min-height: calc(100vh - 56px - 80px);
+  position: relative;
+  background-color: var(--bg-inset);
+}
+
+.login-wrapper {
+  width: 100%;
+  max-width: 420px;
+  z-index: 1;
+}
+
+.login-card {
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.login-header {
+  padding: var(--sp-8) var(--sp-8) var(--sp-4);
+  text-align: center;
+}
+
+.login-title {
+  margin-bottom: var(--sp-2);
+}
+
+.login-subtitle {
+  color: var(--text-secondary);
+}
+
+.login-form {
+  padding: 0 var(--sp-8) var(--sp-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.form-label {
+  color: var(--text-secondary);
+}
+
+.form-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-forgot {
+  font-size: 12px;
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.form-forgot:hover {
+  text-decoration: underline;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--border-strong);
+  font-size: 18px;
+}
+
+/* Divider */
+.login-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-2) 0;
+}
+
+.login-divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border-base);
+}
+
+.login-divider-text {
+  color: var(--text-faint);
+  white-space: nowrap;
+}
+
+/* Social Buttons */
+.social-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-4);
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  border: 1px solid var(--border-base);
+  border-radius: var(--radius-md);
+  padding: 8px 16px;
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 500;
+  transition: all var(--transition-base);
+}
+
+.social-btn:hover {
+  background: var(--bg-inset);
+  border-color: var(--border-hover);
+}
+
+.social-btn:active {
+  transform: scale(0.97);
+}
+
+/* Footer */
+.login-footer {
+  padding: 0 var(--sp-8) var(--sp-8);
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.login-signup-link {
+  color: var(--primary);
+  font-weight: 600;
+  margin-left: 6px;
+}
+
+.login-signup-link:hover {
+  text-decoration: underline;
+}
+
+/* Version */
+.login-version {
+  margin-top: var(--sp-6);
+  text-align: center;
+  color: var(--text-faint);
+  font-size: 11px;
+}
