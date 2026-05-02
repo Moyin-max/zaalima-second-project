@@ -6,6 +6,15 @@ const path = require('path');
 
 dotenv.config();
 
+// Environment Validation
+const requiredEnvVars = ['MONGODB_URI', 'OPENAI_API_KEY', 'JWT_SECRET'];
+requiredEnvVars.forEach(varName => {
+  if (!process.env[varName]) {
+    console.error(`FATAL ERROR: Environment variable ${varName} is missing.`);
+    process.exit(1);
+  }
+});
+
 const app = express();
 
 // Middleware
@@ -14,8 +23,12 @@ app.use(express.json());
 
 // Database Connection
 mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
+  .then(() => console.log('✅ MongoDB connected successfully'))
+  .catch(err => {
+    console.error('❌ MongoDB connection error:');
+    console.error('   Please make sure MongoDB is installed and running on your system.');
+    console.error('   Error details:', err.message);
+  });
 
 // Routes (to be added)
 app.get('/', (req, res) => {
