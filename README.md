@@ -1,57 +1,78 @@
-# Extensio.ai - Professional Frontend
+# Extensio.ai
 
-A high-performance, aesthetically pleasing AI extension generator frontend built with React, Vite, and Framer Motion.
+Extensio.ai is a full-stack Chrome extension generator built with a React/Vite frontend and an Express/MongoDB backend.
 
-## 🚀 Features
+## Stack
 
-- **Modern UI/UX**: Professional design with smooth animations and transitions.
-- **Responsive Design**: Works seamlessly across all devices.
-- **Dynamic Routing**: Built-in navigation for Dashboard, Generator, Pricing, and Auth pages.
-- **Technical Precision**: Optimized code structure and asset management.
+- Frontend: React, Vite, Framer Motion
+- Backend: Node.js, Express, MongoDB, Mongoose
+- Packaging: Archiver
 
-## 🛠️ Tech Stack
+## Local Setup
 
-- **Framework**: React.js
-- **Build Tool**: Vite
-- **Animations**: Framer Motion
-- **Styling**: Vanilla CSS (Custom tokens)
+### 1. Install frontend dependencies
 
-## 📦 Getting Started
+```bash
+npm install
+```
 
-### Prerequisites
+### 2. Install backend dependencies
 
-- Node.js (Latest LTS recommended)
-- npm or yarn
+```bash
+cd server
+npm install
+cd ..
+```
 
-### Installation
+### 3. Create environment files
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/manas-kasaudhan/zaalima-second-project.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd zaalima-second-project
-   ```
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
+Frontend:
 
-### Development
+- Copy `.env.example` to `.env`
+- Set `VITE_API_BASE_URL`
 
-Run the development server:
+Example:
+
+```env
+VITE_API_BASE_URL=http://localhost:5000
+```
+
+Backend:
+
+- Copy `server/.env.example` to `server/.env`
+- Set:
+  - `MONGODB_URI`
+  - `OPENAI_API_KEY`
+  - `JWT_SECRET`
+
+See [server/README.md](C:/Users/MOYIN/Downloads/zaalima-second-project-main/zaalima-second-project-main/server/README.md) for backend setup details.
+
+## Run Locally
+
+Start the backend:
+
+```bash
+cd server
+npm start
+```
+
+Start the frontend in a second terminal:
+
 ```bash
 npm run dev
 ```
 
-### Build
+## Build
 
-Build for production:
+Frontend production build:
+
 ```bash
 npm run build
 ```
 
-## 📄 License
+## Deployment Notes
 
-This project is licensed under the MIT License.
+- Do not commit `.env` or `server/.env`
+- Use `.env.example` and `server/.env.example` as safe templates
+- Frontend hosting can use `VITE_API_BASE_URL` pointing to your deployed backend
+- Backend hosting should set `MONGODB_URI`, `OPENAI_API_KEY`, and `JWT_SECRET` in the host dashboard
