@@ -2,7 +2,7 @@ function normalizeEmail(email = '') {
   return String(email).trim().toLowerCase();
 }
 
-function validateAuthPayload({ username, email, password }, { requireUsername = false } = {}) {
+function validateAuthPayload({ username, email, password } = {}, { requireUsername = false } = {}) {
   const normalizedEmail = normalizeEmail(email);
   const trimmedUsername = typeof username === 'string' ? username.trim() : '';
   const normalizedPassword = typeof password === 'string' ? password : '';
@@ -28,7 +28,7 @@ function validateAuthPayload({ username, email, password }, { requireUsername = 
   };
 }
 
-function validateProjectInput({ title, prompt }, { requirePrompt = true } = {}) {
+function validateProjectInput({ title, prompt } = {}, { requirePrompt = true } = {}) {
   const normalizedTitle = typeof title === 'string' ? title.trim() : '';
   const normalizedPrompt = typeof prompt === 'string' ? prompt.trim() : '';
 
