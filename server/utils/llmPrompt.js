@@ -54,7 +54,12 @@ async function generateExtensionCode(userPrompt) {
       'Unknown OpenAI error';
 
     console.error('Error generating code:', providerMessage);
-    throw new Error(`Failed to generate extension code: ${providerMessage}`);
+
+    if (/quota|billing|rate limit|insufficient/i.test(providerMessage)) {
+      throw new Error('AI generation is temporarily unavailable. Please try again later.');
+    }
+
+    throw new Error('Failed to generate extension code. Please try again.');
   }
 }
 
