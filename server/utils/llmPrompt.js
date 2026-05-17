@@ -62,11 +62,130 @@ async function generateExtensionCode(userPrompt) {
     console.error('Error generating code:', providerMessage);
 
     if (/quota|billing|rate limit|insufficient/i.test(providerMessage)) {
-      throw new Error('AI generation is temporarily unavailable. Please try again later.');
+      const unavailableError = new Error('AI generation is temporarily unavailable. Please try again later.');
+      unavailableError.code = 'AI_PROVIDER_UNAVAILABLE';
+      throw unavailableError;
     }
 
     throw new Error('Failed to generate extension code. Please try again.');
   }
 }
 
-module.exports = { generateExtensionCode };
+function generateDemoExtensionCode(userPrompt, projectTitle = 'Demo Extension') {
+  const normalizedPrompt = String(userPrompt || '').toLowerCase();
+  const extensionName = String(projectTitle || 'Demo Extension').slice(0, 45);
+
+  if (normalizedPrompt.includes('image') && normalizedPrompt.includes('red square')) {
+    return {
+      'manifest.json': JSON.stringify({
+        manifest_version: 3,
+        name: extensionName,
+        version: '1.0.0',
+        description: 'Demo fallback extension that replaces images with red squares.',
+        permissions: ['activeTab'],
+        content_scripts: [
+          {
+            matches: ['<all_urls>'],
+            js: ['content.js'],
+            css: ['styles.css'],
+          },
+        ],
+        action: {
+          default_popup: 'popup.html',
+        },
+      }, null, 2),
+      'content.js': `const placeholderClass = 'extensio-demo-red-square';
+
+function replaceImages() {
+  document.querySelectorAll('img').forEach((img) => {
+    if (img.dataset.extensioProcessed === 'true') return;
+
+    const box = document.createElement('div');
+    const width = img.width || img.naturalWidth || 120;
+    const height = img.height || img.naturalHeight || 120;
+
+    box.className = placeholderClass;
+    box.style.width = \`\${Math.max(width, 40)}px\`;
+    box.style.height = \`\${Math.max(height, 40)}px\`;
+    box.title = 'Image replaced by Extensio.ai demo mode';
+
+    img.dataset.extensioProcessed = 'true';
+    img.replaceWith(box);
+  });
+}
+
+replaceImages();
+new MutationObserver(replaceImages).observe(document.body, { childList: true, subtree: true });`,
+      'styles.css': `.${'extensio-demo-red-square'} {
+  background: #dc2626;
+  border: 2px solid #991b1b;
+  box-sizing: border-box;
+  display: inline-block;
+}`,
+      'popup.html': `<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>${extensionName}</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 0; padding: 16px; width: 260px; background: #111827; color: white; }
+      h1 { font-size: 16px; margin: 0 0 8px; }
+      p { font-size: 13px; line-height: 1.5; margin: 0; color: #d1d5db; }
+    </style>
+  </head>
+  <body>
+    <h1>${extensionName}</h1>
+    <p>Demo mode is active. Images on the page are being replaced with red squares.</p>
+  </body>
+</html>`,
+    };
+  }
+
+  return {
+    'manifest.json': JSON.stringify({
+      manifest_version: 3,
+      name: extensionName,
+      version: '1.0.0',
+      description: 'Demo fallback extension generated when the AI provider is unavailable.',
+      permissions: ['activeTab', 'scripting'],
+      action: {
+        default_popup: 'popup.html',
+      },
+    }, null, 2),
+    'popup.html': `<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>${extensionName}</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 0; padding: 16px; width: 280px; }
+      h1 { font-size: 16px; margin: 0 0 10px; }
+      p { font-size: 13px; color: #374151; line-height: 1.5; }
+      button { width: 100%; padding: 10px 12px; border: none; background: #2563eb; color: white; border-radius: 8px; cursor: pointer; }
+    </style>
+  </head>
+  <body>
+    <h1>${extensionName}</h1>
+    <p>This extension was generated in demo mode while the AI provider was temporarily unavailable.</p>
+    <button id="highlightBtn">Highlight Buttons</button>
+    <script src="popup.js"></script>
+  </body>
+</html>`,
+    'popup.js': `document.getElementById('highlightBtn').addEventListener('click', async () => {
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  if (!tab?.id) return;
+
+  await chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    func: () => {
+      document.querySelectorAll('button, a').forEach((el) => {
+        el.style.outline = '3px solid #2563eb';
+        el.style.outlineOffset = '2px';
+      });
+    },
+  });
+});`,
+  };
+}
+
+module.exports = { generateExtensionCode, generateDemoExtensionCode };

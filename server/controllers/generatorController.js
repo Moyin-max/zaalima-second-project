@@ -1,4 +1,4 @@
-const { generateExtensionCode } = require('../utils/llmPrompt');
+const { generateExtensionCode, generateDemoExtensionCode } = require('../utils/llmPrompt');
 const { createExtensionZip } = require('../utils/fileManager');
 const { sanitizeGeneratedCode } = require('../utils/security');
 const Project = require('../models/Project');
@@ -15,7 +15,21 @@ const generate = async (req, res) => {
     const userId = req.user?.id;
     
     // 1. Generate code from LLM
-    let files = await generateExtensionCode(prompt);
+    let files;
+    let message = 'Extension generated successfully';
+    let usedDemoMode = false;
+
+    try {
+      files = await generateExtensionCode(prompt);
+    } catch (error) {
+      if (error.code !== 'AI_PROVIDER_UNAVAILABLE') {
+        throw error;
+      }
+
+      usedDemoMode = true;
+      message = 'Demo extension generated because the AI provider is temporarily unavailable.';
+      files = generateDemoExtensionCode(prompt, title);
+    }
     
     // 2. Sanitize code
     files = sanitizeGeneratedCode(files);
@@ -35,7 +49,8 @@ const generate = async (req, res) => {
     await project.save();
     
     res.json({
-      message: 'Extension generated successfully',
+      message,
+      demoMode: usedDemoMode,
       files,
       zipUrl,
       project: { id: project._id, title: project.title }
