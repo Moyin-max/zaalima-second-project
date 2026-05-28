@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './DashboardPage.css'
-import { apiRequest } from '../utils/api'
+import { apiRequest, API_BASE_URL } from '../utils/api'
 import { clearSession, getStoredToken, getStoredUser } from '../utils/session'
 
 function DashboardPage() {
@@ -101,7 +101,7 @@ function DashboardPage() {
               <div className="dash-project-footer">
                 <span className="font-label-caps">Saved in MongoDB</span>
                 {project.zipUrl ? (
-                  <a className="dash-project-link" href={`http://localhost:5000${project.zipUrl}`} target="_blank" rel="noreferrer">
+                  <a className="dash-project-link" href={`${API_BASE_URL}${project.zipUrl}`} target="_blank" rel="noreferrer">
                     Download zip
                   </a>
                 ) : null}
