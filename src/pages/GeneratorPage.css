@@ -139,6 +139,14 @@
   color: #b42318;
 }
 
+.gen-message-success {
+  color: var(--success);
+}
+
+.gen-message-warning {
+  color: #b54708;
+}
+
 /* Extension Info */
 .gen-extension-info {
   margin-top: auto;

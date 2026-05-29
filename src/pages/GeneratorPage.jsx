@@ -36,6 +36,8 @@ function GeneratorPage() {
   const [project, setProject] = useState(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState('')
+  const [statusMessage, setStatusMessage] = useState('')
+  const [isDemoMode, setIsDemoMode] = useState(false)
   const [copied, setCopied] = useState(false)
 
   useEffect(() => {
@@ -64,6 +66,8 @@ function GeneratorPage() {
 
     setIsSubmitting(true)
     setError('')
+    setStatusMessage('')
+    setIsDemoMode(false)
     setCopied(false)
 
     try {
@@ -81,6 +85,8 @@ function GeneratorPage() {
       setFiles(data.files)
       setZipUrl(`${API_BASE_URL}${data.zipUrl}`)
       setProject(data.project)
+      setStatusMessage(data.message || 'Extension generated successfully.')
+      setIsDemoMode(Boolean(data.demoMode))
       setActiveTab(Object.keys(data.files)[0] || 'manifest.json')
     } catch (err) {
       if (err.message === 'Please authenticate.') {
@@ -165,6 +171,11 @@ function GeneratorPage() {
         </div>
 
         {error ? <p className="gen-message gen-message-error">{error}</p> : null}
+        {statusMessage ? (
+          <p className={`gen-message ${isDemoMode ? 'gen-message-warning' : 'gen-message-success'}`}>
+            {statusMessage}
+          </p>
+        ) : null}
 
         <div className="gen-extension-info animate-slide-in-left stagger-3">
           <div className="gen-ext-badge">
