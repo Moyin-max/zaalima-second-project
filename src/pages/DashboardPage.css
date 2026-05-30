@@ -40,6 +40,10 @@
   color: #b42318;
 }
 
+.dash-message-success {
+  color: var(--success);
+}
+
 /* Empty State */
 .dash-empty {
   border: 2px dashed var(--border-hover);
@@ -148,6 +152,37 @@
 
 .dash-project-link:hover {
   text-decoration: underline;
+}
+
+.dash-project-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.dash-project-delete {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-base);
+}
+
+.dash-project-delete:hover {
+  color: #b42318;
+  background: rgba(180, 35, 24, 0.08);
+}
+
+.dash-project-delete:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dash-project-delete .material-symbols-outlined {
+  font-size: 18px;
 }
 
 /* Stats */

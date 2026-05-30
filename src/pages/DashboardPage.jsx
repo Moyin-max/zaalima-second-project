@@ -9,6 +9,8 @@ function DashboardPage() {
   const [projects, setProjects] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState('')
+  const [message, setMessage] = useState('')
+  const [deletingProjectId, setDeletingProjectId] = useState('')
   const [username, setUsername] = useState('')
 
   useEffect(() => {
@@ -48,6 +50,43 @@ function DashboardPage() {
     loadProjects()
   }, [navigate])
 
+  const handleDeleteProject = async (projectId) => {
+    const token = getStoredToken()
+
+    if (!token) {
+      navigate('/login')
+      return
+    }
+
+    const shouldDelete = window.confirm('Delete this saved extension project?')
+    if (!shouldDelete) return
+
+    setError('')
+    setMessage('')
+    setDeletingProjectId(projectId)
+
+    try {
+      await apiRequest(`/api/projects/${projectId}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      setProjects((currentProjects) => currentProjects.filter((project) => project._id !== projectId))
+      setMessage('Project deleted.')
+    } catch (err) {
+      setError(err.message)
+
+      if (err.message === 'Please authenticate.') {
+        clearSession()
+        navigate('/login')
+      }
+    } finally {
+      setDeletingProjectId('')
+    }
+  }
+
   const stats = [
     { label: 'Total Builds', value: String(projects.length), color: 'var(--text-primary)' },
     { label: 'Latest Version', value: projects[0] ? `v${projects[0].version}` : '-', color: 'var(--text-primary)' },
@@ -73,6 +112,7 @@ function DashboardPage() {
       </header>
 
       {error ? <p className="dash-message dash-message-error">{error}</p> : null}
+      {message ? <p className="dash-message dash-message-success">{message}</p> : null}
 
       {isLoading ? (
         <div className="dash-state card">
@@ -100,11 +140,23 @@ function DashboardPage() {
               <p className="font-body-sm dash-project-prompt">{project.prompt}</p>
               <div className="dash-project-footer">
                 <span className="font-label-caps">Saved in MongoDB</span>
-                {project.zipUrl ? (
-                  <a className="dash-project-link" href={`${API_BASE_URL}${project.zipUrl}`} target="_blank" rel="noreferrer">
-                    Download zip
-                  </a>
-                ) : null}
+                <div className="dash-project-actions">
+                  {project.zipUrl ? (
+                    <a className="dash-project-link" href={`${API_BASE_URL}${project.zipUrl}`} target="_blank" rel="noreferrer">
+                      Download zip
+                    </a>
+                  ) : null}
+                  <button
+                    className="dash-project-delete"
+                    type="button"
+                    onClick={() => handleDeleteProject(project._id)}
+                    disabled={deletingProjectId === project._id}
+                    title="Delete project"
+                    aria-label={`Delete ${project.title}`}
+                  >
+                    <span className="material-symbols-outlined">delete</span>
+                  </button>
+                </div>
               </div>
             </article>
           ))}
