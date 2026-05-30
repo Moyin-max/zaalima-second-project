@@ -4,8 +4,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const openai = new OpenAI({
-  apiKey: process.env.XAI_API_KEY,
-  baseURL: 'https://api.x.ai/v1',
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 const SYSTEM_PROMPT = `
@@ -37,7 +36,7 @@ Chain of Thought:
 async function generateExtensionCode(userPrompt) {
   try {
     const response = await openai.chat.completions.create({
-      model: 'grok-4.3',
+      model: process.env.OPENAI_MODEL || 'gpt-4o-mini',
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },
         { role: 'user', content: userPrompt }
@@ -57,7 +56,7 @@ async function generateExtensionCode(userPrompt) {
       error?.response?.data?.error?.message ||
       error?.error?.message ||
       error?.message ||
-      'Unknown xAI error';
+      'Unknown OpenAI error';
 
     console.error('Error generating code:', providerMessage);
 

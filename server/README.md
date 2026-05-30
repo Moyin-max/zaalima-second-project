@@ -11,7 +11,8 @@ npm install
 Copy `server/.env.example` to `server/.env` and fill in:
 
 - `MONGODB_URI`
-- `XAI_API_KEY`
+- `OPENAI_API_KEY`
+- `OPENAI_MODEL` optionally, defaults to `gpt-4o-mini`
 - `JWT_SECRET`
 - `FRONTEND_URL` for your deployed frontend origin
 
