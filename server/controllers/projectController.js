@@ -1,5 +1,5 @@
 const Project = require('../models/Project');
-const { generateExtensionCode } = require('../utils/llmPrompt');
+const { generateExtensionCode, generateDemoExtensionCode } = require('../utils/llmPrompt');
 const { createExtensionZip } = require('../utils/fileManager');
 const { sanitizeGeneratedCode } = require('../utils/security');
 const { validateProjectInput } = require('../utils/validation');
@@ -37,7 +37,15 @@ const updateProject = async (req, res) => {
 
     // If a new prompt is provided, regenerate the code
     if (prompt && prompt !== project.prompt) {
-      let files = await generateExtensionCode(`Update this extension: ${prompt}. Previous context: ${project.prompt}`);
+      let files;
+
+      try {
+        files = await generateExtensionCode(`Update this extension: ${prompt}. Previous context: ${project.prompt}`);
+      } catch (error) {
+        console.warn('Falling back to demo extension mode while updating project:', error.message);
+        files = generateDemoExtensionCode(prompt, title || project.title);
+      }
+
       files = sanitizeGeneratedCode(files);
       const zipFileName = await createExtensionZip(files);
       project.files = files;
@@ -57,7 +65,12 @@ const updateProject = async (req, res) => {
 
 const deleteProject = async (req, res) => {
   try {
-    await Project.findOneAndDelete({ _id: req.params.id, userId: req.user.id });
+    const project = await Project.findOneAndDelete({ _id: req.params.id, userId: req.user.id });
+
+    if (!project) {
+      return res.status(404).json({ error: 'Project not found' });
+    }
+
     res.json({ message: 'Project deleted' });
   } catch (error) {
     res.status(500).json({ error: error.message });
