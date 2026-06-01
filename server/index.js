@@ -54,6 +54,19 @@ app.use('/api/projects', projectRoutes);
 // Static folder for downloads
 app.use('/downloads', express.static(path.join(__dirname, 'tmp')));
 
+app.use((req, res) => {
+  res.status(404).json({ error: 'Route not found' });
+});
+
+app.use((err, req, res, next) => {
+  if (err.message === 'Not allowed by CORS') {
+    return res.status(403).json({ error: 'Origin is not allowed by CORS.' });
+  }
+
+  console.error(err);
+  return res.status(500).json({ error: 'Internal server error' });
+});
+
 const PORT = process.env.PORT || 5000;
 
 async function startServer() {
