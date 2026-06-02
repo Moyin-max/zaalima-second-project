@@ -35,6 +35,10 @@ function Navbar() {
     }
   }, [])
 
+  useEffect(() => {
+    setMobileOpen(false)
+  }, [location.pathname])
+
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light'
     setTheme(newTheme)
@@ -61,7 +65,7 @@ function Navbar() {
     <header className="navbar">
       <div className="navbar-inner">
         <div className="navbar-left">
-          <Link to="/" className="navbar-logo">Extensio.ai</Link>
+          <Link to="/" className="navbar-logo" onClick={() => setMobileOpen(false)}>Extensio.ai</Link>
           <nav className="navbar-links">
             {navLinks.map((link) => (
               <Link
@@ -89,7 +93,7 @@ function Navbar() {
                 <Link to="/login" className={`navbar-link ${isActive('/login') ? 'active' : ''}`}>
                   Login
                 </Link>
-                <Link to="/signup" className="btn btn-primary btn-sm">
+                <Link to="/signup" className="btn btn-primary btn-sm" onClick={() => setMobileOpen(false)}>
                   Sign up
                 </Link>
               </>
@@ -144,7 +148,7 @@ function Navbar() {
               </>
             ) : (
               <>
-                <Link to="/login" className="navbar-mobile-link" onClick={() => setMobileOpen(false)}>Login</Link>
+                <Link to="/login" className={`navbar-mobile-link ${isActive('/login') ? 'active' : ''}`} onClick={() => setMobileOpen(false)}>Login</Link>
                 <Link to="/signup" className="btn btn-primary btn-full" onClick={() => setMobileOpen(false)}>Sign up</Link>
               </>
             )}
