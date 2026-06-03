@@ -127,6 +127,23 @@
   transform: scale(0.97);
 }
 
+.social-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.social-btn:disabled:hover {
+  background: transparent;
+  border-color: var(--border-base);
+}
+
+.social-note {
+  margin-top: calc(var(--sp-4) * -1);
+  color: var(--text-muted);
+  font-size: 12px;
+  text-align: center;
+}
+
 /* Footer */
 .login-footer {
   padding: 0 var(--sp-8) var(--sp-8);

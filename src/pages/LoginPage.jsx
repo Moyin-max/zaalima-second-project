@@ -96,15 +96,16 @@ function LoginPage() {
 
             {/* Social Login */}
             <div className="social-grid">
-              <button className="social-btn" type="button">
+              <button className="social-btn" type="button" disabled title="GitHub login is coming soon">
                 <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>terminal</span>
                 <span>GitHub</span>
               </button>
-              <button className="social-btn" type="button">
+              <button className="social-btn" type="button" disabled title="Google login is coming soon">
                 <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>cloud</span>
                 <span>Google</span>
               </button>
             </div>
+            <p className="social-note">Social login is coming soon. Use email and password for now.</p>
           </form>
 
           {/* Footer Link */}
