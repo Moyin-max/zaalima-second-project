@@ -15,6 +15,12 @@ function SignupPage() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
+
+    if (password.length < 8) {
+      setError('Password must be at least 8 characters long.')
+      return
+    }
+
     setIsSubmitting(true)
 
     try {
@@ -80,8 +86,10 @@ function SignupPage() {
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                minLength={8}
                 required
               />
+              <p className="signup-help">Use at least 8 characters.</p>
             </div>
 
             {error ? <p className="form-message form-message-error">{error}</p> : null}

@@ -43,6 +43,11 @@
   padding: 12px 14px;
 }
 
+.signup-help {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
 .signup-footer {
   margin-top: var(--sp-8);
   padding-top: var(--sp-6);
