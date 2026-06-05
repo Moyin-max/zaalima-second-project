@@ -178,6 +178,10 @@
   color: #b42318;
 }
 
+.form-message-info {
+  color: var(--text-secondary);
+}
+
 .login-form button[disabled] {
   opacity: 0.7;
   cursor: not-allowed;

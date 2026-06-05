@@ -9,11 +9,13 @@ function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [notice, setNotice] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
+    setNotice('')
     setIsSubmitting(true)
 
     try {
@@ -63,7 +65,13 @@ function LoginPage() {
             <div className="form-group">
               <div className="form-label-row">
                 <label className="font-label-caps form-label" htmlFor="login-password">Password</label>
-                <a href="#" className="form-forgot">Forgot password?</a>
+                <button
+                  className="form-forgot"
+                  type="button"
+                  onClick={() => setNotice('Password reset is coming soon. For now, create a new account or contact support.')}
+                >
+                  Forgot password?
+                </button>
               </div>
               <div className="input-wrapper">
                 <span className="material-symbols-outlined input-icon">lock</span>
@@ -81,6 +89,7 @@ function LoginPage() {
             </div>
 
             {error ? <p className="form-message form-message-error">{error}</p> : null}
+            {notice ? <p className="form-message form-message-info">{notice}</p> : null}
 
             <button className="btn btn-primary btn-full btn-lg" type="submit" id="login-submit" disabled={isSubmitting}>
               <span>{isSubmitting ? 'Logging in...' : 'Login'}</span>
