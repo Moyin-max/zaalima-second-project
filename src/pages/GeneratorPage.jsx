@@ -22,6 +22,7 @@ const tabIcon = (filename) => {
 }
 
 const DEFAULT_PROMPT = 'Build a chrome extension that highlights all price tags on any e-commerce website and converts them to Bitcoin values based on the current market rate.'
+const DEFAULT_TITLE = 'Bitcoin Price Converter'
 
 function GeneratorPage() {
   const navigate = useNavigate()
@@ -111,6 +112,13 @@ function GeneratorPage() {
     }
   }
 
+  const handleUseExample = () => {
+    setTitle(DEFAULT_TITLE)
+    setPrompt(DEFAULT_PROMPT)
+    setError('')
+    setStatusMessage('')
+  }
+
   return (
     <div className="generator">
       <section className="gen-sidebar">
@@ -146,6 +154,10 @@ function GeneratorPage() {
             placeholder="Describe the Chrome extension you want to build..."
             rows={8}
           />
+          <button className="gen-example-btn" type="button" onClick={handleUseExample}>
+            <span className="material-symbols-outlined">tips_and_updates</span>
+            Use example prompt
+          </button>
         </div>
 
         <div className="gen-prompt-card animate-slide-in-left stagger-1">
