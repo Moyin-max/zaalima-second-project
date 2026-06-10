@@ -14,6 +14,13 @@ function DashboardPage() {
   const [username, setUsername] = useState('')
 
   useEffect(() => {
+    if (!message) return undefined
+
+    const timeoutId = window.setTimeout(() => setMessage(''), 3000)
+    return () => window.clearTimeout(timeoutId)
+  }, [message])
+
+  useEffect(() => {
     const token = getStoredToken()
     const storedUser = getStoredUser()
 
