@@ -120,7 +120,7 @@ function PricingPage() {
           </div>
           <h4 className="font-headline-md pricing-info-title">Developer Docs</h4>
           <p className="font-body-sm pricing-info-desc">Integrate our SDK in minutes with comprehensive documentation.</p>
-          <a href="#" className="pricing-docs-link">View SDK docs →</a>
+          <Link to="/docs" className="pricing-docs-link">View SDK docs →</Link>
         </div>
       </section>
 
